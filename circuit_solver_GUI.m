@@ -189,6 +189,12 @@ function circuit_solver_GUI
 %   - fix, test w editing name of only el then adding a second el
 
 %% Main
+
+% include path
+folder = fileparts(mfilename("fullpath"));
+p = genpath(folder);
+addpath(p)
+
 dbstop if error
 Create_GUI
 end
@@ -233,7 +239,7 @@ end
 function opts = default_opts
 %% Default configuration options
 
-% options field format (4 columns):
+% options field format (4 fields):
 %   opts.fieldname = {default, description, isEditable, Grouping}
 
 % Groups : 'General Optics', 'Format', 'Settings tab', 'Symbols', 'Other', 'None'
@@ -448,8 +454,9 @@ function add_element(btn)
 % Change pointer :
 f = btn.Parent.Parent;
 f.Pointer = 'custom';
+pause(.1)
 f.PointerShapeCData = f.UserData.Symbols.pointers.(btn.Tag); 
-drawnow % This works! Nice
+drawnow % This works! Nice ~~~ no it dont. nevermind.
 
 % Turn on hover capabailty
 iptPointerManager(f,'enable')
